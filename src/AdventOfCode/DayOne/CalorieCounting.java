@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 public class CalorieCounting {
     public static void main(String[] args) {
+
         // read the data into memory
         try {
             File elves = new File("./src/AdventOfCode/DayOne/dayOne.txt");
@@ -27,11 +28,13 @@ public class CalorieCounting {
                 }
                 tempSum += Integer.parseInt(token);
             }
+            r.close();
             System.out.printf("One elf has %d calories available!", mostCals);
         } catch (FileNotFoundException e) {
             System.out.println("An error occured when opening the file");
             e.printStackTrace();
         }
+
 
     }
 }
