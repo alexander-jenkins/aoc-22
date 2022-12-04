@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 /*
  *  Advent of Code - 2022
- *  Day Two, Part One
+ *  Day Two
  *
  *  Rock, Paper and Scissors
  *  
@@ -26,6 +26,7 @@ import java.util.ArrayList;
  *      - Win = 6pt
  *
  *  Part 1: read the file in and see how many points you would get.
+ *  Part 2: Well actually, the file shows the outcome instead of the moves you should make to win.
  *
  */
 
@@ -33,9 +34,18 @@ public class RockPaperScissors {
     public static void main(String[] args) {
         try {
             File rounds = new File("./src/AdventOfCode/DayTwo/tournamentRounds.txt");
+            Scanner r = new Scanner(rounds);
+
+            // create a list to hold each individual round
+            List<String> roundList = new ArrayList<String>();
+
+            while(r.hasNextLine()) {
+                roundList.add(r.nextLine().trim());
+            }
             
             // figure out how many points I have
-            partOne(rounds);
+            partOne(roundList);
+            partTwo(roundList);
 
         } catch (FileNotFoundException e) {
             System.out.println("Encountered and error opening the file.");
@@ -44,21 +54,13 @@ public class RockPaperScissors {
 
     }
 
-    private static void partOne(File rounds) throws FileNotFoundException { 
-        Scanner r = new Scanner(rounds);
-
-        // create a list to hold each individual round
-        List<String> roundList = new ArrayList<String>();
-
-        while(r.hasNextLine()) {
-            roundList.add(r.nextLine().trim());
-        }
-
-        // parse each round as a tuple and add up the scores
+    private static void partOne(List<String> rounds) throws FileNotFoundException { 
         int score = 0;
-        for (String rd : roundList) score += roundScore(rd);
-        System.out.printf("Your Total: %d%n", score);
+        for (String rd : rounds) score += roundScore(rd);
+        System.out.printf("Part 1: you scored %d points.%n", score);
+    }
 
+    private static void partTwo(List<String> rounds) throws FileNotFoundException {
     }
 
     private static int opponentPoints(char move) {
